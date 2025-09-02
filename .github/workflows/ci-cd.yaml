@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: hireshikshak_ci
 
 on:
   push:
@@ -27,3 +27,15 @@ jobs:
             --platform linux/amd64,linux/arm64 \
             --tag $IMAGE_NAME:latest \
             --push .
+  
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Deploy App
+        run: |
+          IMAGE_NAME=hireshikshak/backend
+          docker pull $IMAGE_NAME:latest
+          docker stop backend || true
+          docker rm backend || true
+          docker run -d --name backend -p 80:8051 $IMAGE_NAME:latest
