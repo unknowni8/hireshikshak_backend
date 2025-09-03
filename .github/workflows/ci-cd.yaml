@@ -42,4 +42,4 @@ jobs:
           docker pull $IMAGE_NAME:latest
           docker stop backend || true
           docker rm backend || true
-          docker run -d --name backend -p 80:8051 $IMAGE_NAME:latest
+          docker run -d --name backend -p 8051:8051 $IMAGE_NAME:latest
