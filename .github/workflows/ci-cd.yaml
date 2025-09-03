@@ -43,3 +43,6 @@ jobs:
           docker stop backend || true
           docker rm backend || true
           docker run -d --name backend -p 8051:8051 $IMAGE_NAME:latest
+      - name: Cleanup old images
+        run: |
+          docker image prune -f
