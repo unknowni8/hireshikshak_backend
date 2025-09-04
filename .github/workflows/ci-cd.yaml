@@ -31,6 +31,13 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
+      - name: create .env file
+        run: |
+          cat >.env <<'EOF'
+          NODE_ENV=${{ vars.NODE_ENV }}
+          PORT=${{ vars.PORT }}
+          LOG_LEVEL=${{ vars.LOG_LEVEL }}
+          EOF
       - name: Docker Login (on server)
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | 
@@ -42,7 +49,19 @@ jobs:
           docker pull $IMAGE_NAME:latest
           docker stop backend || true
           docker rm backend || true
-          docker run -d --name backend -p 8051:8051 $IMAGE_NAME:latest
+          docker run -d \
+            --name backend \
+            --restart unless-stopped \
+            -p 8051:8051 \
+            --env-file .env.production \
+            $IMAGE_NAME:latest
+
+          echo "Waiting for container to start..."
+          sleep 10
+
+          echo "Testing health endpoint..."
+          curl -f http://localhost:8051/v1/health || echo "Health check failed"
+
       - name: Cleanup old images
         run: |
           docker image prune -f

@@ -7,7 +7,11 @@ v1.use("/user", userRoutes);
 v1.get(
   "/health",
   tryCatchUtil(async (req, res) => {
-    return res.send({ health: "OK" });
+    return res.json({
+      status: "healthy",
+      environment: process.env.NODE_ENV,
+      timestamp: new Date().toISOString(),
+    });
   })
 );
 
