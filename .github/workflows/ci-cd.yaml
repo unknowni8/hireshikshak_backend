@@ -53,7 +53,7 @@ jobs:
             --name backend \
             --restart unless-stopped \
             -p 8051:8051 \
-            --env-file .env.production \
+            --env-file .env \
             $IMAGE_NAME:latest
 
           echo "Waiting for container to start..."
