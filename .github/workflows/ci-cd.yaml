@@ -37,6 +37,9 @@ jobs:
           NODE_ENV=${{ vars.NODE_ENV }}
           PORT=${{ vars.PORT }}
           LOG_LEVEL=${{ vars.LOG_LEVEL }}
+
+          # Database Configuration
+          MONGO_URI=${{ secrets.MONGO_URI }}
           EOF
       - name: Docker Login (on server)
         run: |

@@ -3,9 +3,9 @@ import helmet from 'helmet';
 import compression from 'compression'
 import cors from 'cors'
 import v1 from './routes_v1/index.js';
-import requestLogger from './middlewares/req_logger_middleware.js';
-import { errorHandler } from './middlewares/error_handler_middleware.js';
-import notFound from './middlewares/page_not_found_middleware.js';
+import requestLogger from './middlewares/reqLoggerMiddleware.js';
+import { errorHandler } from './middlewares/errorHandlerMiddleware.js';
+import notFound from './middlewares/pageNotFoundMiddleware.js';
 
 export const createServer = () => {
     const app = express();

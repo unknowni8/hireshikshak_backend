@@ -4,13 +4,11 @@ services:
   backend:
     image: hireshikshak_backend
     container_name: hireshikshak_nodejs
-    restart: always
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile.dev
     env_file: ./.env.dev
-    ports:
-      - "8051:8051"
     develop:
       watch:
         - action: sync
@@ -18,16 +16,32 @@ services:
           target: /usr/app
           ignore:
             - node_modules/
+            - hireshikshak_dev_db_data/
         - action: rebuild
           path: ./package.json
+    depends_on:
+      - mongodb
 
-  # nginx:
-  #   image: nginx:latest
-  #   container_name: hireshikshak_nginx
-  #   restart: always
-  #   volumes:
-  #     - ./default.conf:/etc/nginx/conf.d/default.conf
-  #   ports:
-  #     - "8051:80"
-  #   depends_on:
-  #     - backend
+  mongodb:
+      image: mongo
+      environment:
+        - MONGO_INITDB_ROOT_USERNAME=hireshikshak
+        - MONGO_INITDB_ROOT_PASSWORD=hireshikshak
+      ports:
+        - "27018:27017"
+      container_name: hireshikshak_mongodb
+      restart: unless-stopped
+      volumes:
+        - type: bind
+          source: ./hireshikshak_dev_db_data
+          target: /data/db
+  nginx:
+    image: nginx:latest
+    container_name: hireshikshak_nginx
+    restart: always
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8051:80"
+    depends_on:
+      - backend

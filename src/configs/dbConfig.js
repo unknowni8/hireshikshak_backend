@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { envConfig } from "../utilities/env_keys_util.js";
+import { envConfig } from "../utilities/envKeysUtil.js";
 
 const MAX_RETRY_ATTEMPTS = 3;
 const RETRY_DELAY_MS = 5000;
@@ -90,11 +90,7 @@ class MongoDBConnection {
     }
 }
 
-// Create and export a single instance
 const mongoDBConnection = new MongoDBConnection();
 
-// Optional: Auto-connect when imported
-// mongoDBConnection.connect()
-//     .catch(err => console.error('Initial connection error:', err));
 
 export default mongoDBConnection;

@@ -1,4 +1,4 @@
-import ErrorMsgUtil from "../utilities/error_msg_util.js";
+import ErrorMsgUtil from "../utilities/errorMsgUtil.js";
 
 const notFound = (req, res, next) => {
     res.status(404).json({
