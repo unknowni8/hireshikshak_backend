@@ -1,0 +1,20 @@
+# <type>(<scope>): <short summary>
+# --------------------
+# Example:
+# feat(auth): add JWT authentication
+#
+# Commit types: feat, fix, docs, style, refactor, test, chore
+#
+# The first line should be under 72 characters.
+
+<type>(<scope>): <summary>
+
+# Detailed description (optional)
+# - What was changed?
+# - Why was it changed?
+# - Any notes for reviewers?
+
+# Footer (optional)
+# - Link issues, breaking changes, etc.
+# Example: Closes #123
+
