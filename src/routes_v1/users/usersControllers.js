@@ -1,5 +1,6 @@
 import { logger } from "../../configs/loggerConfig.js";
 import CustomError from "../../errors/customError.js";
+import ErrorMsgUtil from "../../errors/errorMsg.js";
 import { getUserById } from "../../services/userService.js";
 import tryCatchUtil from "../../utilities/tryCatchUtil.js";
 
@@ -7,7 +8,7 @@ export const getUser = tryCatchUtil(async (req, res) => {
   const { id } = req.params;
   const user = await getUserById(id);
   if (!user) {
-    throw new CustomError("User not found", 400);
+    throw new CustomError(ErrorMsgUtil.USER_NOT_FOUND, 404);
   }
 return res.send({ data: {user} });
 });

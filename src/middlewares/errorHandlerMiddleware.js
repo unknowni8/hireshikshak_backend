@@ -1,6 +1,6 @@
 import { logger } from "../configs/loggerConfig.js";
 import CustomError from "../errors/customError.js";
-import ErrorMsgUtil from "../utilities/errorMsgUtil.js";
+import ErrorMsgUtil from "../errors/errorMsg.js";
 
 export const errorHandler = (err, req, res, next) => {
   logger.error(err);
