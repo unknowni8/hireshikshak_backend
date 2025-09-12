@@ -5,7 +5,7 @@ const userRoutes = express.Router();
 
 /**
  * @openapi
- * /users/{id}:
+ * /v1/users/{id}:
  *   get:
  *     summary: Get user by ID
  *     parameters:
@@ -22,7 +22,7 @@ userRoutes.get("/:id", getUser);
 
 /**
  * @openapi
- * /users:
+ * /v1/users:
  *   get:
  *     summary: Get all users
  *     responses:
@@ -33,7 +33,7 @@ userRoutes.get("/", getUsers);
 
 /**
  * @openapi
- * /users:
+ * /v1/users:
  *   post:
  *     summary: Create a user
  *     responses:
@@ -44,7 +44,7 @@ userRoutes.post("/", createUser);
 
 /**
  * @openapi
- * /users/{id}:
+ * /v1/users/{id}:
  *   patch:
  *     summary: Update a user
  *     parameters:
@@ -61,7 +61,7 @@ userRoutes.patch("/:id", updateUser);
 
 /**
  * @openapi
- * /users/{id}:
+ * /v1/users/{id}:
  *   delete:
  *     summary: Delete a user
  *     parameters:

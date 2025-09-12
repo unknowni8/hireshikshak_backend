@@ -8,7 +8,6 @@ const options = {
       version: "1.0.0",
       description: "API documentation",
     },
-    servers: [{ url: "/api/v1" }],
   },
   apis: ["./src/routes_v1/**/*.js"],
 };
